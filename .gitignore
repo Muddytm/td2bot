@@ -1,0 +1,4 @@
+config.py
+images/icon.png
+data/icons.json
+__pycache__/
