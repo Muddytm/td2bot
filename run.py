@@ -47,11 +47,14 @@ async def on_ready():
 
                 # Post announcement and question
                 questions = ["What item should you *never* get on this hero?",
-                             "How am I supposed to play this?",
-                             "Are they OP?",
-                             "Are they meta right now?",
-                             "How do you play them?",
-                             "What's a must-get item on this bad boy/girl/thing?"]
+                             "Is this hero OP?",
+                             "Is this hero in the meta right now?",
+                             "How do you play this hero?",
+                             "What's a must-get item on this hero?",
+                             "Is this hero's Aghanim's upgrade any good?",
+                             "What's this hero's biggest weakness?",
+                             "What's this hero's biggest strength?",
+                             "When's the right time to pick this hero?"]
 
                 await client.send_message(channel,
                                           "Today's hero is **{}**. {}".format(hero_name.replace("_", " "), random.choice(questions)))
