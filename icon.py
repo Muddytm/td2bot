@@ -5,7 +5,7 @@ import json
 import random
 import os
 
-template = "images/circleborder.png"
+template = "images/circlebordertransparent.png"
 
 
 def make():
