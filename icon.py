@@ -5,7 +5,7 @@ import json
 import random
 import os
 
-template = "images/circlebordertransparent.png"
+template = "images/banner.png"
 
 
 def make():
@@ -20,6 +20,7 @@ def make():
             files.append(filename)
             #full_file = "images/heroes/{}".format(filename)
             #file = filename
+            break
 
     if not files:
         with open("data/icons.json", "w") as f:
