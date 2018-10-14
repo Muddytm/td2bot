@@ -41,7 +41,7 @@ def make():
     with open("data/icons.json", "w") as f:
         json.dump(data, f)
 
-    return file.replace(".json", "")
+    return file
 
 
 #if __name__ == "__main__":

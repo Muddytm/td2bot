@@ -28,7 +28,8 @@ async def on_ready():
 
     if len(sys.argv) > 1 and sys.argv[1] == "icon":
         # Whole bunch of stuff to make the icon and make the correct name.
-        hero = blahblah.make().replace(".png", "").replace("_", " ")
+        hero_file = blahblah.make()
+        hero = hero_file.replace(".png", "").replace("_", " ")
         hero_name = ""
         hero_words = hero.split()
         for word in hero_words:
@@ -55,6 +56,9 @@ async def on_ready():
                              "What's this hero's biggest weakness?",
                              "What's this hero's biggest strength?",
                              "When's the right time to pick this hero?"]
+
+                with open("images/heroes/{}".format(hero_file), "rb") as f:
+                    await client.send_file(channel, f)
 
                 await client.send_message(channel,
                                           "Today's hero is **{}**. {}".format(hero_name.replace("_", " "), random.choice(questions)))
