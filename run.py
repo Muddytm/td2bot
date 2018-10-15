@@ -15,7 +15,13 @@ client = commands.Bot(command_prefix=commands.when_mentioned_or(BOT_PREFIX))
 
 if not os.path.isfile("data/icons.json"):
     with open("data/icons.json", "w") as outfile:
-        data = {"used": []}
+        data = []
+        json.dump(data, outfile)
+
+
+if not os.path.isfile("data/requests.json"):
+    with open("data/icons.json", "w") as outfile:
+        data = []
         json.dump(data, outfile)
 
 
@@ -75,6 +81,60 @@ async def on_message(message):
 
     # This allows us to use other commands as well.
     await client.process_commands(message)
+
+
+@client.command(pass_context=True)
+async def requesthero(ctx, *stuff):
+    """Request a hero for daily discussion!"""
+    if ctx.message.channel.name != "botcommands":
+        await client.say("Please request a hero in #botcommands.")
+        return
+
+    if not stuff:
+        await client.say("Please provide a hero name (i.e. `!requesthero puck`).")
+        return
+
+    stuff_string = "_".join(stuff).replace("\'", "")
+
+    with open("data/requests.json") as f:
+        request_data = json.load(f)
+
+    with open("data/icons.json") as f:
+        used_data = json.load(f)
+
+    if stuff_string == "io":
+        stuff_string = "io.png"
+
+    for i in range(len(request_data)):
+        if request_data[i]["name"] == ctx.message.author.name:
+            await client.say("You've already requested a hero! Please wait until yours is featured before requesting another.")
+            return
+        elif stuff_string in request_data[i]["hero"]:
+            await client.say("This hero's already on the waiting list.")
+            return
+
+    hero = ""
+    for filename in os.listdir("images/heroes"):
+        if stuff_string in filename and "README" not in filename:
+            hero = filename
+
+    if not hero:
+        await client.say("This isn't a hero...")
+        return
+    if hero not in used_data:
+        request_data.append({"name": ctx.message.author.name, "hero": hero})
+        with open("data/requests.json", "w") as f:
+            json.dump(request_data, f)
+
+        wait = len(request_data)
+        if wait == 1:
+            await client.say("Hero was added! It will be featured tomorrow.")
+        else:
+            await client.say("Hero was added! It will be featured in {} days.".format(str(wait)))
+        return
+    else:
+        await client.say("This hero has already been featured!")
+        return
 
 
 @client.command(pass_context=True)
