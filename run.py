@@ -162,6 +162,14 @@ async def schedule(ctx, stuff=""):
 
         count += 1
 
+    await client.say(response)
+
+
+@client.command(pass_context=True)
+async def test(ctx, stuff=""):
+    """Test."""
+    await client.say("OwO")
+
 
 @client.command(pass_context=True)
 @commands.has_any_role("Admin")
