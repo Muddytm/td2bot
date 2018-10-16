@@ -151,14 +151,21 @@ async def schedule(ctx, stuff=""):
 
     count = 1
     for request in request_data:
+        hero_name = request["hero"].replace("_", " ").replace(".png", "")
+        name = ""
+        for word in hero_name:
+            name += "{} ".format(word.capitalize())
+
+        name = name.strip().replace("Of", "of")
+
         if count == 1:
-            response += "\n`NEXT: {}`".format(request["hero"])
+            response += "\n`NEXT: {}`".format(name)
         elif count < 11:
-            response += "\n`In {} days: {}`".format(str(count), request["hero"])
+            response += "\n`In {} days: {}`".format(str(count), name)
         elif count == 11:
-            response += "\n...followed by: {}".format(request["hero"])
+            response += "\n...followed by: {}".format(name)
         else:
-            response += ", {}".format(request["hero"])
+            response += ", {}".format(name)
 
         count += 1
 
