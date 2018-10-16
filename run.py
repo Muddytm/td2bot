@@ -138,6 +138,32 @@ async def requesthero(ctx, *stuff):
 
 
 @client.command(pass_context=True)
+async def schedule(ctx, stuff=""):
+    """List the daily discussion schedule."""
+    with open("data/requests.json") as f:
+        request_data = json.load(f)
+
+    if not request_data:
+        await client.say("There are no hero discussions scheduled, so future discussions will be randomly selected. Type `!requesthero hero` to schedule a hero discussion!")
+        return
+
+    response = "The daily hero discussion schedule is as follows:"
+
+    count = 1
+    for request in request_data:
+        if count == 1:
+            response += "\n`NEXT: {}`".format(request["hero"])
+        elif count < 11:
+            response += "\n`In {} days: {}`".format(str(count), request["hero"])
+        elif count == 11:
+            response += "\n...followed by: {}".format(request["hero"])
+        else:
+            response += ", {}".format(request["hero"])
+
+        count += 1
+
+
+@client.command(pass_context=True)
 @commands.has_any_role("Admin")
 async def scram(ctx, stuff=""):
     """Close the bot."""
