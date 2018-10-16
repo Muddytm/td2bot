@@ -151,7 +151,7 @@ async def schedule(ctx, stuff=""):
 
     count = 1
     for request in request_data:
-        hero_name = request["hero"].replace("_", " ").replace(".png", "")
+        hero_name = request["hero"].replace("_", " ").replace(".png", "").split()
         name = ""
         for word in hero_name:
             name += "{} ".format(word.capitalize())
