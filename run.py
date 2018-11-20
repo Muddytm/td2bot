@@ -94,7 +94,7 @@ async def requesthero(ctx, *stuff):
         await client.say("Please provide a hero name (i.e. `!requesthero puck`).")
         return
 
-    stuff_string = "_".join(stuff).replace("\'", "")
+    stuff_string = "_".join(stuff).replace("\'", "").lower()
 
     with open("data/requests.json") as f:
         request_data = json.load(f)
