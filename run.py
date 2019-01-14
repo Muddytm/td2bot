@@ -43,7 +43,7 @@ async def on_ready():
         hero_name = hero_name.strip()
 
         for channel in client.get_all_channels():
-            if "discussion" in channel.name:
+            if "-discussion" in channel.name and "New hero discussions" in channel.topic:
                 # Do server icon change
                 with open("images/icon.png", "rb") as f:
                     icon = f.read()
