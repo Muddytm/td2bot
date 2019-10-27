@@ -53,15 +53,16 @@ async def on_ready():
                 await client.edit_channel(channel, name="{}-discussion".format(hero))
 
                 # Post announcement and question
-                questions = ["What item should you *never* get on this hero?",
-                             "Is this hero OP?",
-                             "Is this hero in the meta right now?",
-                             "How do you play this hero?",
-                             "What's a must-get item on this hero?",
+                questions = ["Is this hero strong in the current meta? Why or why not?",
+                             "How the !@#$ you play this hero?",
                              "Is this hero's Aghanim's upgrade any good?",
                              "What's this hero's biggest weakness?",
                              "What's this hero's biggest strength?",
-                             "When's the right time to pick this hero?"]
+                             "When's the right time to pick this hero?",
+                             "What is this hero's impact at each point of the game?",
+                             "What's your preferred skill build with this hero?",
+                             "Are their talents any good? Which ones are the best?",
+                             "What are some common mistakes with this hero?"]
 
                 with open("images/heroes/{}".format(hero_file), "rb") as f:
                     await client.send_file(channel, f)

@@ -25,19 +25,19 @@ def make():
     else:
         files = []
         for filename in os.listdir("images/heroes"):
-            if "README" not in filename and filename not in data["used"]:
+            if "README" not in filename and filename not in data:
                 files.append(filename)
                 break
 
         if not files:
             with open("data/icons.json", "w") as f:
-                data = {"used": []}
+                data = []
                 json.dump(data, f)
             file = "arc_warden.png"
         else:
             file = random.choice(files)
 
-    data["used"].append(file)
+    data.append(file)
 
     img = Image.open("images/heroes/{}".format(file))
     overlay = Image.open(template)
